@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>前程留學 — Devotion Education</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Noto+Serif+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F5F0E8;
+    --cream-dark: #EDE6D8;
+    --cream-mid: #E8DFD0;
+    --ink: #2A2318;
+    --ink-mid: #4A3F30;
+    --ink-light: #7A6E5F;
+    --gold: #8B6914;
+    --gold-light: #C4963A;
+    --warm-white: #FAF7F2;
+    --section-gap: 6rem;
+    --serif-en: 'Playfair Display', 'EB Garamond', Georgia, serif;
+    --serif-zh: 'Noto Serif TC', 'Playfair Display', serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: var(--serif-zh);
+    line-height: 1.75;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(245,240,232,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid rgba(139,105,20,0.15);
+    transition: all 0.3s;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; }
+  .nav-logo svg { width: 22px; height: 22px; color: var(--ink-mid); }
+  .nav-logo-text { font-family: var(--serif-en); font-size: 0.95rem; color: var(--ink-mid); letter-spacing: 0.05em; line-height: 1.2; }
+  .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+  .nav-links a { font-family: var(--serif-en); font-size: 0.9rem; color: var(--ink-mid); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--ink); }
+  .nav-cta {
+    font-family: var(--serif-en); font-size: 0.85rem; padding: 0.5rem 1.4rem;
+    background: var(--ink); color: var(--cream); border: none; cursor: pointer;
+    letter-spacing: 0.06em; text-decoration: none; transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--ink-mid); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh; position: relative;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 0 0 5rem 4rem;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(30,22,10,0.35) 0%, rgba(30,22,10,0.6) 100%);
+    z-index: 1;
+  }
+  /* Placeholder library image via CSS gradient pattern */
+  .hero-img-bg {
+    position: absolute; inset: 0;
+    background: #3d2f1a;
+    background-image: 
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 80px),
+      repeating-linear-gradient(180deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 120px);
+    z-index: 0;
+  }
+  .hero-img-bg img {
+    width: 100%; height: 100%; object-fit: cover; opacity: 0.85;
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 900px; }
+  .hero-tag {
+    font-family: var(--serif-zh); font-size: 1.6rem; font-weight: 300;
+    color: rgba(255,255,255,0.85); letter-spacing: 0.15em;
+    margin-bottom: 0.8rem; display: block;
+  }
+  .hero-h1 {
+    font-family: var(--serif-en); font-size: clamp(3.5rem, 7vw, 6rem);
+    font-weight: 700; color: #fff; line-height: 1.05;
+    letter-spacing: -0.02em; margin-bottom: 1.5rem;
+  }
+  .hero-sub {
+    font-family: var(--serif-en); font-size: 1.15rem; font-weight: 400;
+    font-style: italic; color: rgba(255,255,255,0.75);
+    letter-spacing: 0.03em;
+  }
+  .hero-scroll {
+    position: absolute; bottom: 2.5rem; right: 3rem; z-index: 2;
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    color: rgba(255,255,255,0.5); font-size: 0.72rem; letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .scroll-line { width: 1px; height: 50px; background: rgba(255,255,255,0.3); animation: scrollpulse 2s infinite; }
+  @keyframes scrollpulse { 0%,100%{opacity:0.3} 50%{opacity:0.8} }
+
+  /* ── SECTIONS ── */
+  section { padding: var(--section-gap) 4rem; }
+  .section-label {
+    font-family: var(--serif-en); font-size: 0.75rem; font-weight: 400;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.6rem; display: block;
+  }
+  .section-title {
+    font-family: var(--serif-zh); font-size: clamp(2rem, 3.5vw, 2.8rem);
+    font-weight: 500; color: var(--ink); line-height: 1.25;
+  }
+  .section-title em { font-family: var(--serif-en); font-style: italic; color: var(--gold); }
+  .section-body {
+    font-size: 1rem; color: var(--ink-light); max-width: 600px;
+    line-height: 1.9; margin-top: 1.2rem;
+  }
+  .divider { width: 40px; height: 1px; background: var(--gold-light); margin: 1.5rem 0; }
+
+  /* ── INTRO SECTION ── */
+  #intro { background: var(--warm-white); display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .intro-text {}
+  .intro-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .stat-card {
+    background: var(--cream); border: 0.5px solid rgba(139,105,20,0.2);
+    padding: 1.8rem 1.5rem;
+  }
+  .stat-num { font-family: var(--serif-en); font-size: 2.8rem; font-weight: 600; color: var(--ink); line-height: 1; }
+  .stat-label { font-size: 0.82rem; color: var(--ink-light); letter-spacing: 0.06em; margin-top: 0.4rem; }
+  .cta-btn {
+    display: inline-block; margin-top: 2rem;
+    padding: 0.85rem 2.2rem; background: var(--ink); color: var(--cream);
+    font-family: var(--serif-en); font-size: 0.9rem; letter-spacing: 0.08em;
+    text-decoration: none; border: none; cursor: pointer; transition: background 0.2s;
+  }
+  .cta-btn:hover { background: var(--gold); }
+
+  /* ── PHOTO GALLERY (replaceable grid) ── */
+  #gallery { background: var(--cream); }
+  .gallery-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2.5rem; }
+  .gallery-hint { font-family: var(--serif-en); font-size: 0.8rem; font-style: italic; color: var(--ink-light); }
+
+  .photo-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: auto;
+    gap: 12px;
+  }
+  /* Grid layout: varied sizes for magazine feel */
+  .photo-item { position: relative; overflow: hidden; background: var(--cream-mid); cursor: pointer; }
+  .photo-item:nth-child(1) { grid-column: span 5; grid-row: span 2; min-height: 340px; }
+  .photo-item:nth-child(2) { grid-column: span 4; min-height: 164px; }
+  .photo-item:nth-child(3) { grid-column: span 3; min-height: 164px; }
+  .photo-item:nth-child(4) { grid-column: span 4; min-height: 164px; }
+  .photo-item:nth-child(5) { grid-column: span 3; min-height: 164px; }
+  .photo-item:nth-child(6) { grid-column: span 4; grid-row: span 2; min-height: 340px; }
+  .photo-item:nth-child(7) { grid-column: span 8; min-height: 220px; }
+  .photo-item:nth-child(8) { grid-column: span 5; min-height: 180px; }
+  .photo-item:nth-child(9) { grid-column: span 3; min-height: 180px; }
+
+  .photo-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
+  .photo-item:hover img { transform: scale(1.04); }
+  .photo-overlay {
+    position: absolute; inset: 0; background: rgba(30,22,10,0);
+    display: flex; align-items: flex-end; padding: 1rem;
+    transition: background 0.3s;
+  }
+  .photo-item:hover .photo-overlay { background: rgba(30,22,10,0.35); }
+  .photo-caption {
+    font-family: var(--serif-en); font-size: 0.75rem; font-style: italic;
+    color: rgba(255,255,255,0); letter-spacing: 0.06em;
+    transition: color 0.3s;
+  }
+  .photo-item:hover .photo-caption { color: rgba(255,255,255,0.9); }
+
+  /* Replace photo button */
+  .photo-edit-btn {
+    position: absolute; top: 8px; right: 8px; z-index: 5;
+    background: rgba(245,240,232,0.92); border: 0.5px solid rgba(139,105,20,0.4);
+    padding: 4px 10px; font-size: 0.7rem; letter-spacing: 0.06em;
+    cursor: pointer; color: var(--ink-mid); display: none;
+    font-family: var(--serif-en);
+  }
+  .photo-item:hover .photo-edit-btn { display: block; }
+  .photo-edit-btn:hover { background: var(--cream-dark); }
+  /* Hidden file input */
+  .photo-file-input { display: none; }
+
+  /* ── STUDENT BOARD ── */
+  #students { background: var(--cream-dark); }
+  .students-layout { display: grid; grid-template-columns: 1fr 1.6fr; gap: 4rem; margin-top: 3rem; }
+
+  /* Leaderboard */
+  .leaderboard-title {
+    font-family: var(--serif-en); font-size: 0.8rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem;
+  }
+  .board-table { width: 100%; border-collapse: collapse; }
+  .board-table th {
+    font-family: var(--serif-en); font-size: 0.72rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--ink-light); padding: 0.6rem 0.8rem;
+    border-bottom: 1px solid rgba(139,105,20,0.2); text-align: left; font-weight: 400;
+  }
+  .board-table td { padding: 0.85rem 0.8rem; font-size: 0.9rem; border-bottom: 0.5px solid rgba(139,105,20,0.1); }
+  .board-table tr:last-child td { border-bottom: none; }
+  .board-table tr:hover td { background: rgba(139,105,20,0.04); }
+  .rank { font-family: var(--serif-en); font-size: 0.75rem; color: var(--ink-light); font-weight: 400; }
+  .rank.gold { color: #B8860B; font-weight: 600; }
+  .rank.silver { color: #7A7A7A; font-weight: 600; }
+  .rank.bronze { color: #8B4513; font-weight: 600; }
+  .school-tag {
+    display: inline-block; padding: 2px 8px;
+    background: rgba(139,105,20,0.1); color: var(--gold);
+    font-size: 0.72rem; letter-spacing: 0.06em; font-family: var(--serif-en);
+  }
+  .country-badge { font-size: 0.8rem; color: var(--ink-light); }
+
+  /* Reviews */
+  .reviews-wrap { display: flex; flex-direction: column; gap: 1.5rem; }
+  .review-card {
+    background: var(--warm-white); padding: 1.8rem 2rem;
+    border-left: 2px solid var(--gold-light); position: relative;
+  }
+  .review-stars { color: var(--gold-light); font-size: 0.9rem; margin-bottom: 0.6rem; letter-spacing: 0.1em; }
+  .review-text {
+    font-family: var(--serif-en); font-size: 0.95rem; font-style: italic;
+    color: var(--ink-mid); line-height: 1.8; margin-bottom: 1rem;
+  }
+  .review-meta { display: flex; align-items: center; justify-content: space-between; }
+  .review-author { font-size: 0.82rem; font-weight: 500; color: var(--ink); }
+  .review-school { font-size: 0.75rem; color: var(--ink-light); letter-spacing: 0.04em; }
+
+  /* ── TIMELINE ── */
+  #timeline { background: var(--ink); color: var(--cream); }
+  #timeline .section-label { color: var(--gold-light); }
+  #timeline .section-title { color: var(--cream); }
+  #timeline .section-body { color: rgba(245,240,232,0.65); }
+  #timeline .divider { background: rgba(196,150,58,0.4); }
+
+  .timeline-container { margin-top: 4rem; position: relative; }
+  .timeline-axis {
+    position: absolute; left: 50%; top: 0; bottom: 0;
+    width: 1px; background: rgba(196,150,58,0.25); transform: translateX(-50%);
+  }
+
+  .tl-phase { display: flex; gap: 3rem; margin-bottom: 0; position: relative; }
+  .tl-phase:nth-child(odd) { flex-direction: row; }
+  .tl-phase:nth-child(even) { flex-direction: row-reverse; }
+
+  .tl-content {
+    width: calc(50% - 3rem);
+    padding: 2rem 0;
+  }
+  .tl-phase:nth-child(odd) .tl-content { text-align: right; padding-right: 3rem; }
+  .tl-phase:nth-child(even) .tl-content { text-align: left; padding-left: 3rem; }
+
+  .tl-node {
+    width: 6rem;
+    display: flex; flex-direction: column; align-items: center; padding: 2rem 0; flex-shrink: 0;
+    position: relative; z-index: 2;
+  }
+  .tl-dot {
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--cream); border: 2px solid var(--gold-light);
+    flex-shrink: 0;
+  }
+  .tl-dot.active { background: var(--gold-light); box-shadow: 0 0 0 4px rgba(196,150,58,0.2); }
+  .tl-month {
+    font-family: var(--serif-en); font-size: 0.7rem; letter-spacing: 0.1em;
+    color: var(--gold-light); margin-top: 0.5rem; text-align: center;
+    text-transform: uppercase;
+  }
+
+  .tl-spacer { width: calc(50% - 3rem); }
+
+  .tl-phase-label {
+    font-family: var(--serif-en); font-size: 0.72rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--gold-light); margin-bottom: 0.3rem;
+  }
+  .tl-phase-title {
+    font-family: var(--serif-zh); font-size: 1.25rem; font-weight: 500;
+    color: var(--cream); margin-bottom: 0.6rem; line-height: 1.3;
+  }
+  .tl-items { list-style: none; }
+  .tl-items li {
+    font-size: 0.87rem; color: rgba(245,240,232,0.6); padding: 0.3rem 0;
+    border-top: 0.5px solid rgba(245,240,232,0.08);
+    display: flex; align-items: baseline; gap: 0.5rem;
+  }
+  .tl-phase:nth-child(odd) .tl-items li { flex-direction: row-reverse; }
+  .tl-items li::before { content: '—'; color: var(--gold-light); opacity: 0.5; font-size: 0.7rem; flex-shrink: 0; }
+
+  /* UK / US tabs */
+  .tl-tabs { display: flex; gap: 0; margin-bottom: 3rem; }
+  .tl-tab {
+    padding: 0.7rem 2rem; font-family: var(--serif-en); font-size: 0.85rem;
+    letter-spacing: 0.08em; cursor: pointer; border: 1px solid rgba(196,150,58,0.25);
+    background: transparent; color: rgba(245,240,232,0.5); transition: all 0.2s;
+  }
+  .tl-tab.active { background: rgba(196,150,58,0.15); color: var(--cream); border-color: var(--gold-light); }
+  .tl-tab:hover:not(.active) { color: rgba(245,240,232,0.8); }
+
+  .tl-dataset { display: none; }
+  .tl-dataset.active { display: block; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink); color: rgba(245,240,232,0.5);
+    padding: 3rem 4rem; display: flex; justify-content: space-between; align-items: center;
+    border-top: 0.5px solid rgba(196,150,58,0.1);
+  }
+  .footer-logo { font-family: var(--serif-en); font-size: 1rem; color: rgba(245,240,232,0.7); display: flex; align-items: center; gap: 0.5rem; }
+  .footer-copy { font-size: 0.78rem; letter-spacing: 0.04em; }
+  .footer-links { display: flex; gap: 1.8rem; }
+  .footer-links a { font-family: var(--serif-en); font-size: 0.8rem; color: rgba(245,240,232,0.45); text-decoration: none; letter-spacing: 0.06em; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--gold-light); }
+
+  /* ── UTILS ── */
+  .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+      <line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/>
+      <line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/>
+    </svg>
+    <span class="nav-logo-text">Devotion<br>Education</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#" class="active">Home</a></li>
+    <li><a href="#intro">About us</a></li>
+    <li><a href="#gallery">生活分享</a></li>
+    <li><a href="#students">學生榜單</a></li>
+    <li><a href="#timeline">申請時間軸</a></li>
+  </ul>
+  <a href="#intro" class="nav-cta">免費諮詢</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-img-bg">
+    <!-- Replace src with your own hero image -->
+    <img id="hero-img" src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1600&q=80" alt="Library">
+  </div>
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <span class="hero-tag">前程留學</span>
+    <h1 class="hero-h1">Guided with devotion,<br>built for your future.</h1>
+    <p class="hero-sub">Where sincere guidance shapes global futures.</p>
+  </div>
+  <div class="hero-scroll"><span>Scroll</span><div class="scroll-line"></div></div>
+</section>
+
+<!-- INTRO -->
+<section id="intro">
+  <div class="intro-text fade-in">
+    <span class="section-label">Who we are</span>
+    <h2 class="section-title">開啟你的<br><em>國際前程</em></h2>
+    <div class="divider"></div>
+    <p class="section-body">
+      Every great journey begins with a single step forward.<br><br>
+      專業、透明、全程陪伴——我們相信每一位學生都值得被認真對待。
+      前程提供的不只是代辦服務，更是你留學路上最可靠的夥伴。
+    </p>
+    <a href="#" class="cta-btn">免費諮詢</a>
+  </div>
+  <div class="intro-stats fade-in">
+    <div class="stat-card">
+      <div class="stat-num">98%</div>
+      <div class="stat-label">學生錄取率</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">150+</div>
+      <div class="stat-label">成功申請學生</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">G5</div>
+      <div class="stat-label">英國頂尖大學</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">T10</div>
+      <div class="stat-label">美國前十名校</div>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO GALLERY -->
+<section id="gallery">
+  <div class="gallery-header fade-in">
+    <div>
+      <span class="section-label">Life abroad</span>
+      <h2 class="section-title">海外生活<em> 分享</em></h2>
+    </div>
+    <span class="gallery-hint">Hover over any photo to replace it</span>
+  </div>
+
+  <div class="photo-grid">
+    <!-- Each .photo-item: hover to see replace button, click it to upload new photo -->
+    <div class="photo-item" data-index="0">
+      <img src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=800&q=80" alt="海外生活">
+      <div class="photo-overlay"><span class="photo-caption">London campus life</span></div>
+      <button class="photo-edit-btn" onclick="triggerUpload(0)">換照片</button>
+      <input type="file" class="photo-file-input" accept="image/*" onchange="replacePhoto(this, 0)">
+    </div>
+    <div class="photo-item" data-index="1">
+      <img src="https://images.unsplash.com/photo-1473177104440-ffee2f376098?w=600&q=80" alt="校園">
+      <div class="photo-overlay"><span class="photo-caption">Oxford architecture</span></div>
+      <button class="photo-edit-btn" onclick="triggerUpload(1)">換照片</button>
+      <input type="file" class="photo-file-input" accept="image/*" onchange="replacePhoto(this, 1)">
+    </div>
+    <div class="photo-item" data-index="2">
+      <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&q=80" alt="城市">
+      <div class="photo-overlay"><span class="photo-caption">City exploration</span></div>
+      <button class="photo-edit-btn" onclick="triggerUpload(2)">換照片</button>
+      <input type="file" class="photo-file-input" accept="image/*" onchange="replacePhoto(this, 2)">
+    </div>
+    <div class="photo-item" data-index="3">
+      <img src="https://images.unsplash.com/photo-1607237138185-eedd9c632b0b?w=600&q=80" alt="學習">
+      <div class="photo-overlay"><span class="photo-caption">Study sessions</span></div>
+      <button class="photo-edit-btn" onclick="triggerUpload(3)">換照片</button>
+      <input type="file" class="photo-file-input" accept="image/*" onchange="replacePhoto(this, 3)">
+    </div>
+    <div class="photo-item" data-index="4">
+      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&q=80" alt="同學">
+      <div class="photo-overlay"><span class="photo-caption">New friendships</span></div>
+      <button class="photo-edit-btn" onclick="triggerUpload(4)">換照片</button>
+      <input type="file" class="photo-file-input" accept="image/*" onchange="replacePhoto(this, 4)">
+    </div>
+    <div class="photo-item" data-index="5">
+      <img src="https://images.unsplash.com/photo-1541123437800-1bb1317badc2?w=800&q=80" alt="街景">
+      <div class="photo-overlay"><span class="photo-caption">Weekend travels</span></div>
+      <button class="photo-edit-btn" onclick="triggerUpload(5)">換照片</button>
+      <input type="file" class="photo-file-input" accept="image/*" onchange="replacePhoto(this, 5)">
+    </div>
+    <div class="photo-item" data-index="6">
+      <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=1000&q=80" alt="圖書館">
+      <div class="photo-overlay"><span class="photo-caption">University libraries</span></div>
+      <button class="photo-edit-btn" onclick="triggerUpload(6)">換照片</button>
+      <input type="file" class="photo-file-input" accept="image/*" onchange="replacePhoto(this, 6)">
+    </div>
+    <div class="photo-item" data-index="7">
+      <img src="https://images.unsplash.com/photo-1534361960057-19f4434a5509?w=700&q=80" alt="美食">
+      <div class="photo-overlay"><span class="photo-caption">Local food culture</span></div>
+      <button class="photo-edit-btn" onclick="triggerUpload(7)">換照片</button>
+      <input type="file" class="photo-file-input" accept="image/*" onchange="replacePhoto(this, 7)">
+    </div>
+    <div class="photo-item" data-index="8">
+      <img src="https://images.unsplash.com/photo-1455849318743-b2233052fcff?w=600&q=80" alt="旅遊">
+      <div class="photo-overlay"><span class="photo-caption">Scenic adventures</span></div>
+      <button class="photo-edit-btn" onclick="triggerUpload(8)">換照片</button>
+      <input type="file" class="photo-file-input" accept="image/*" onchange="replacePhoto(this, 8)">
+    </div>
+  </div>
+</section>
+
+<!-- STUDENTS -->
+<section id="students">
+  <div class="fade-in">
+    <span class="section-label">Student achievements</span>
+    <h2 class="section-title">學生榜單 <em>&</em> 心得</h2>
+    <div class="divider"></div>
+    <p class="section-body">前程學生的真實錄取成果與留學心得分享。</p>
+  </div>
+
+  <div class="students-layout fade-in">
+    <!-- LEADERBOARD -->
+    <div>
+      <div class="leaderboard-title">錄取榜單 · Admissions Board</div>
+      <table class="board-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>姓名</th>
+            <th>錄取學校</th>
+            <th>國家</th>
+          </tr>
+        </thead>
+        <tbody id="board-body">
+          <!-- Populated by JS -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- REVIEWS -->
+    <div>
+      <div class="leaderboard-title">學生心得 · Student Reviews</div>
+      <div class="reviews-wrap" id="reviews-wrap">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section id="timeline">
+  <div class="fade-in">
+    <span class="section-label">Application guide</span>
+    <h2 class="section-title">留學申請<em> 時間軸</em></h2>
+    <div class="divider" style="background: rgba(196,150,58,0.4);"></div>
+    <p class="section-body">一年完整申請規劃，讓你的每個步驟都走得扎實。</p>
+  </div>
+
+  <div class="tl-tabs fade-in">
+    <button class="tl-tab active" onclick="switchTimeline('uk')">🇬🇧 United Kingdom</button>
+    <button class="tl-tab" onclick="switchTimeline('us')">🇺🇸 United States</button>
+  </div>
+
+  <!-- UK Timeline -->
+  <div class="tl-dataset active" id="tl-uk">
+    <div class="timeline-container">
+      <div class="timeline-axis"></div>
+
+      <div class="tl-phase">
+        <div class="tl-content">
+          <div class="tl-phase-label">Phase 01</div>
+          <div class="tl-phase-title">前期準備</div>
+          <ul class="tl-items">
+            <li>確認目標科系與學校清單</li>
+            <li>評估語言成績需求 (IELTS/TOEFL)</li>
+            <li>蒐集推薦人選</li>
+          </ul>
+        </div>
+        <div class="tl-node">
+          <div class="tl-dot active"></div>
+          <div class="tl-month">Jan — Mar</div>
+        </div>
+        <div class="tl-spacer"></div>
+      </div>
+
+      <div class="tl-phase">
+        <div class="tl-spacer"></div>
+        <div class="tl-node">
+          <div class="tl-dot active"></div>
+          <div class="tl-month">Apr — Jun</div>
+        </div>
+        <div class="tl-content">
+          <div class="tl-phase-label">Phase 02</div>
+          <div class="tl-phase-title">語言考試衝刺</div>
+          <ul class="tl-items">
+            <li>參加 IELTS / TOEFL 考試</li>
+            <li>目標 IELTS 6.5–7.5+</li>
+            <li>確認是否需要補考</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-phase">
+        <div class="tl-content">
+          <div class="tl-phase-label">Phase 03</div>
+          <div class="tl-phase-title">文件撰寫</div>
+          <ul class="tl-items">
+            <li>個人陳述 (Personal Statement) 初稿</li>
+            <li>推薦信 (Reference Letters) 溝通</li>
+            <li>CV / 學術成績整理</li>
+          </ul>
+        </div>
+        <div class="tl-node">
+          <div class="tl-dot active"></div>
+          <div class="tl-month">Jul — Sep</div>
+        </div>
+        <div class="tl-spacer"></div>
+      </div>
+
+      <div class="tl-phase">
+        <div class="tl-spacer"></div>
+        <div class="tl-node">
+          <div class="tl-dot active"></div>
+          <div class="tl-month">Oct — Nov</div>
+        </div>
+        <div class="tl-content">
+          <div class="tl-phase-label">Phase 04</div>
+          <div class="tl-phase-title">UCAS 送件</div>
+          <ul class="tl-items">
+            <li>UCAS 帳號建立與填寫</li>
+            <li>牛津/劍橋截止 15 Oct</li>
+            <li>一般學校截止 25 Jan</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-phase">
+        <div class="tl-content">
+          <div class="tl-phase-label">Phase 05</div>
+          <div class="tl-phase-title">Offer 決策</div>
+          <ul class="tl-items">
+            <li>等待學校面試 / Offer</li>
+            <li>Firm &amp; Insurance 選擇 (Deadline: May)</li>
+            <li>簽證申請準備</li>
+          </ul>
+        </div>
+        <div class="tl-node">
+          <div class="tl-dot"></div>
+          <div class="tl-month">Feb — May</div>
+        </div>
+        <div class="tl-spacer"></div>
+      </div>
+
+      <div class="tl-phase">
+        <div class="tl-spacer"></div>
+        <div class="tl-node">
+          <div class="tl-dot"></div>
+          <div class="tl-month">Jun — Sep</div>
+        </div>
+        <div class="tl-content">
+          <div class="tl-phase-label">Phase 06</div>
+          <div class="tl-phase-title">出發前準備</div>
+          <ul class="tl-items">
+            <li>Student Visa (Tier 4) 申請</li>
+            <li>宿舍 / 住宿安排</li>
+            <li>行前說明會 &amp; 抵英指引</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- US Timeline -->
+  <div class="tl-dataset" id="tl-us">
+    <div class="timeline-container">
+      <div class="timeline-axis"></div>
+
+      <div class="tl-phase">
+        <div class="tl-content">
+          <div class="tl-phase-label">Phase 01</div>
+          <div class="tl-phase-title">前期規劃</div>
+          <ul class="tl-items">
+            <li>選定目標學校 (Reach / Match / Safety)</li>
+            <li>SAT / ACT / AP 規劃</li>
+            <li>課外活動強化</li>
+          </ul>
+        </div>
+        <div class="tl-node">
+          <div class="tl-dot active"></div>
+          <div class="tl-month">Jan — Apr</div>
+        </div>
+        <div class="tl-spacer"></div>
+      </div>
+
+      <div class="tl-phase">
+        <div class="tl-spacer"></div>
+        <div class="tl-node">
+          <div class="tl-dot active"></div>
+          <div class="tl-month">May — Jul</div>
+        </div>
+        <div class="tl-content">
+          <div class="tl-phase-label">Phase 02</div>
+          <div class="tl-phase-title">標準化考試</div>
+          <ul class="tl-items">
+            <li>SAT / ACT 備考與應試</li>
+            <li>TOEFL 語言考試</li>
+            <li>AP 考試成績確認</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-phase">
+        <div class="tl-content">
+          <div class="tl-phase-label">Phase 03</div>
+          <div class="tl-phase-title">Common App 撰寫</div>
+          <ul class="tl-items">
+            <li>Common App Essay 主文撰寫</li>
+            <li>各校 Supplemental Essays</li>
+            <li>Activities List 整理</li>
+          </ul>
+        </div>
+        <div class="tl-node">
+          <div class="tl-dot active"></div>
+          <div class="tl-month">Aug — Sep</div>
+        </div>
+        <div class="tl-spacer"></div>
+      </div>
+
+      <div class="tl-phase">
+        <div class="tl-spacer"></div>
+        <div class="tl-node">
+          <div class="tl-dot active"></div>
+          <div class="tl-month">Oct — Nov</div>
+        </div>
+        <div class="tl-content">
+          <div class="tl-phase-label">Phase 04</div>
+          <div class="tl-phase-title">Early Decision 送件</div>
+          <ul class="tl-items">
+            <li>ED / EA 截止日 1 Nov</li>
+            <li>推薦信確認送出</li>
+            <li>成績單 / 文件最終確認</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-phase">
+        <div class="tl-content">
+          <div class="tl-phase-label">Phase 05</div>
+          <div class="tl-phase-title">Regular Decision 送件</div>
+          <ul class="tl-items">
+            <li>RD 截止日 1 Jan</li>
+            <li>Financial Aid 申請 (FAFSA / CSS)</li>
+            <li>等待放榜 (Mar–Apr)</li>
+          </ul>
+        </div>
+        <div class="tl-node">
+          <div class="tl-dot"></div>
+          <div class="tl-month">Dec — Apr</div>
+        </div>
+        <div class="tl-spacer"></div>
+      </div>
+
+      <div class="tl-phase">
+        <div class="tl-spacer"></div>
+        <div class="tl-node">
+          <div class="tl-dot"></div>
+          <div class="tl-month">May — Aug</div>
+        </div>
+        <div class="tl-content">
+          <div class="tl-phase-label">Phase 06</div>
+          <div class="tl-phase-title">入學確認 & 簽證</div>
+          <ul class="tl-items">
+            <li>Enrollment Deposit (Deadline: 1 May)</li>
+            <li>F-1 學生簽證申請</li>
+            <li>宿舍申請 &amp; 行前準備</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+      <line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/>
+      <line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/>
+    </svg>
+    Devotion Education &nbsp;·&nbsp; 前程留學
+  </div>
+  <div class="footer-links">
+    <a href="#">United Kingdom</a>
+    <a href="#">United States</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+  </div>
+  <div class="footer-copy">© 2026 Devotion Education. All rights reserved.</div>
+</footer>
+
+<script>
+// ── LEADERBOARD DATA (edit freely) ──
+const boardData = [
+  { rank: 1, name: 'Sophia C.', school: 'London School of Economics', country: '🇬🇧' },
+  { rank: 2, name: 'James L.', school: 'University of Cambridge', country: '🇬🇧' },
+  { rank: 3, name: 'Emily W.', school: 'Columbia University', country: '🇺🇸' },
+  { rank: 4, name: 'Michael T.', school: 'University of Oxford', country: '🇬🇧' },
+  { rank: 5, name: 'Hannah K.', school: 'NYU Stern', country: '🇺🇸' },
+  { rank: 6, name: 'David Y.', school: 'Imperial College London', country: '🇬🇧' },
+  { rank: 7, name: 'Jessica M.', school: 'University of Edinburgh', country: '🇬🇧' },
+  { rank: 8, name: 'Kevin Z.', school: 'Georgetown University', country: '🇺🇸' },
+];
+
+const rankClass = { 1: 'gold', 2: 'silver', 3: 'bronze' };
+const rankLabel = { 1: '🥇', 2: '🥈', 3: '🥉' };
+
+const tbody = document.getElementById('board-body');
+boardData.forEach(d => {
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td><span class="rank ${rankClass[d.rank] || ''}">${rankLabel[d.rank] || d.rank}</span></td>
+    <td style="font-weight: 500;">${d.name}</td>
+    <td><span class="school-tag">${d.school}</span></td>
+    <td class="country-badge">${d.country}</td>
+  `;
+  tbody.appendChild(tr);
+});
+
+// ── REVIEW DATA (edit freely) ──
+const reviews = [
+  {
+    stars: '★★★★★',
+    text: 'The guidance I received was truly personal — they understood exactly what each university was looking for in a candidate. I got into my dream school at LSE.',
+    author: 'Sophia C.',
+    school: 'LSE, MSc Finance · 2024'
+  },
+  {
+    stars: '★★★★★',
+    text: '前程的顧問不只幫我寫文件，更幫我釐清自己的故事。PS 改稿過程雖然辛苦，但每一輪都看到自己的成長，最終拿到 Cambridge 的 offer 真的感動到哭。',
+    author: 'James L.',
+    school: 'University of Cambridge, MPhil · 2024'
+  },
+  {
+    stars: '★★★★☆',
+    text: 'Very structured timeline and always available to answer questions, even late at night before deadlines. Truly felt like they cared about my outcome, not just the process.',
+    author: 'Emily W.',
+    school: 'Columbia University, MA · 2023'
+  }
+];
+
+const wrap = document.getElementById('reviews-wrap');
+reviews.forEach(r => {
+  const div = document.createElement('div');
+  div.className = 'review-card';
+  div.innerHTML = `
+    <div class="review-stars">${r.stars}</div>
+    <p class="review-text">"${r.text}"</p>
+    <div class="review-meta">
+      <span class="review-author">${r.author}</span>
+      <span class="review-school">${r.school}</span>
+    </div>
+  `;
+  wrap.appendChild(div);
+});
+
+// ── PHOTO REPLACE ──
+function triggerUpload(index) {
+  const inputs = document.querySelectorAll('.photo-file-input');
+  inputs[index].click();
+}
+
+function replacePhoto(input, index) {
+  const file = input.files[0];
+  if (!file) return;
+  const url = URL.createObjectURL(file);
+  const imgs = document.querySelectorAll('.photo-item img');
+  imgs[index].src = url;
+}
+
+// ── TIMELINE TABS ──
+function switchTimeline(region) {
+  document.querySelectorAll('.tl-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tl-dataset').forEach(d => d.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('tl-' + region).classList.add('active');
+}
+
+// ── SCROLL ANIMATIONS ──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
